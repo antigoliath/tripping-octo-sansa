@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  exists: false
+  location: MyString
+  name: MyString
+  cost: 9.99
+  owner_id: 1
+
+two:
+  exists: false
+  location: MyString
+  name: MyString
+  cost: 9.99
+  owner_id: 1

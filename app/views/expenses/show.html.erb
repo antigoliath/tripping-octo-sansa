@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Exists:</b>
+  <%= @expense.exists %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%= @expense.location %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @expense.name %>
+</p>
+
+<p>
+  <b>Cost:</b>
+  <%= @expense.cost %>
+</p>
+
+<p>
+  <b>Owner:</b>
+  <%= @expense.owner_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_expense_path(@expense) %> |
+<%= link_to 'Back', expenses_path %>
