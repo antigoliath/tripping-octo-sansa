@@ -80,4 +80,17 @@ class ExpensesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+
+  def get_user_expenses
+    @expense = Expense.find_by_owner_id(params[:id]) 
+    respond_to do |format|
+      format.html { render }
+      format.json { render json: @expense }
+    end
+  end
+
+
+
 end

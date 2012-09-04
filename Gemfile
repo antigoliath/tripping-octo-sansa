@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.8'
 gem 'devise'
 gem 'carrierwave'
+gem 'rmagick'
 gem 'google-api-client', '~> 0.4.3', :require => 'google/api_client'
 
 
