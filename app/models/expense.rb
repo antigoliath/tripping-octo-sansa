@@ -1,7 +1,10 @@
 class Expense < ActiveRecord::Base
 
   attr_accessible :cost, :exists, :location, 
-  :name, :owner_id, :image
+  :name, :owner_id, :image, :remote_image_url
+
+  mount_uploader :image, ImageUploader
+
 
   def connect_to_google
   	oauth_yaml = YAML.load_file('.google-api.yaml')

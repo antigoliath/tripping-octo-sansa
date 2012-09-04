@@ -1,5 +1,9 @@
 <p id="notice"><%= notice %></p>
 
+<div class="image">
+      <%= image_tag @expense.image_url.to_s %>
+</div>
+
 <p>
   <b>Exists:</b>
   <%= @expense.exists %>
