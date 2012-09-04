@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120903183606) do
+ActiveRecord::Schema.define(:version => 20120904200355) do
 
   create_table "expenses", :force => true do |t|
     t.boolean  "exists"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20120903183606) do
     t.integer  "owner_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "image"
   end
 
   create_table "users", :force => true do |t|
