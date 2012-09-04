@@ -3,9 +3,12 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.8'
 gem 'devise'
 gem 'carrierwave'
-gem 'google-api-client'
+gem 'google-api-client', '~> 0.4.3', :require => 'google/api_client'
+
+
 gem 'thin'
 gem 'sinatra'
+gem 'rest-client'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
