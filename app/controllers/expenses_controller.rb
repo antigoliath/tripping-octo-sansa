@@ -81,7 +81,10 @@ class ExpensesController < ApplicationController
     end
   end
 
-
+  def convert
+    @expense = Expense.find(params[:expense])
+    res = @expense.send_image_to_google
+  end
 
   def get_user_expenses
     @expense = Expense.find_by_owner_id(params[:id]) 

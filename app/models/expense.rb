@@ -29,10 +29,19 @@ class Expense < ActiveRecord::Base
 		client = self.api_client
 		begin
 		  	service = client.discovered_api('drive', 'v2')
-		  	res = client.execute(:api_method => service.files.insert,
-		  		:parameters => {:ocr => 'true', :body => self.image}
-		  		)
-		  	logger.info res
+		  	res = client.execute(
+		  		:api_method => service.files.insert,
+		  		:body => image.read,
+		  		:ocr => 'true',
+		  		:convert => 'true',
+		  		:mimeType => 'image/png',
+		  		:parameters => {
+		  			:uploadType => 'multipart'
+		  			})
+		  	logger.info "123"
+		  	logger.info image
+		  	logger.info res.data.id
+		  	res
 		rescue
 			logger.info "Something's not right during image sending"
 		end

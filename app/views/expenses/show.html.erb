@@ -29,6 +29,6 @@
   <%= @expense.owner_id %>
 </p>
 
-
+<%= link_to 'Submit to Google', convert_expenses_path(:expense => @expense) %>
 <%= link_to 'Edit', edit_expense_path(@expense) %> |
 <%= link_to 'Back', expenses_path %>
