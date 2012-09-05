@@ -84,6 +84,9 @@ class ExpensesController < ApplicationController
   def convert
     @expense = Expense.find(params[:expense])
     res = @expense.send_image_to_google
+    respond_to do |format|
+      #format.html {redirect_to @expense}
+    end
   end
 
   def get_user_expenses

@@ -32,11 +32,15 @@ class Expense < ActiveRecord::Base
 		  	res = client.execute(
 		  		:api_method => service.files.insert,
 		  		:body => image.read,
-		  		:ocr => 'true',
+		  		:headers => {
+		  			'Content-Type' => 'image/png'
+		  		},
 		  		:convert => 'true',
 		  		:mimeType => 'image/png',
 		  		:parameters => {
-		  			:uploadType => 'multipart'
+		  			:uploadType => 'multipart',
+		  			:ocr => 'true',
+		  			:title => 'asdfasdf',
 		  			})
 		  	logger.info "123"
 		  	logger.info image
