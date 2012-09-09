@@ -163,6 +163,7 @@ DEPENDENCIES
   devise
   google-api-client (~> 0.4.3)
   jquery-rails
+  jwt
   rails (= 3.2.8)
   rest-client
   rmagick

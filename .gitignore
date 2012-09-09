@@ -3,3 +3,5 @@ log/*.log
 tmp/**/*
 *.swp
 public/uploads/expense/image/*
+config/google_api_key.p12
+.google-api.yaml

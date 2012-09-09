@@ -5,7 +5,7 @@ gem 'devise'
 gem 'carrierwave'
 gem 'rmagick'
 gem 'google-api-client', '~> 0.4.3', :require => 'google/api_client'
-
+gem 'jwt'
 
 gem 'thin'
 gem 'sinatra'
