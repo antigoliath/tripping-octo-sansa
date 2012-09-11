@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120907233033) do
+ActiveRecord::Schema.define(:version => 20120911023251) do
 
   create_table "expenses", :force => true do |t|
     t.boolean  "exists"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20120907233033) do
     t.string   "image"
     t.string   "google_doc_id"
     t.datetime "expire_time"
+    t.string   "access_token"
   end
 
   create_table "users", :force => true do |t|

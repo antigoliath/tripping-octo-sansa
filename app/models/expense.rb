@@ -1,6 +1,8 @@
 class Expense < ActiveRecord::Base
 	attr_accessible :cost, :exists, :location, :expire_time,
-	:name, :owner_id, :image, :google_doc_id, :remote_image_url
+	:name, :owner_id, :image, :google_doc_id, :remote_image_url,
+	:access_token
+	attr_accessor :client
 	mount_uploader :image, ImageUploader
 
 	def check_expire_time!
@@ -13,8 +15,8 @@ class Expense < ActiveRecord::Base
   		# when the token will expire
 		self.expire_time = Time.now+3600
 		self.save
-
 		oauth_yaml = YAML.load_file('.google-api.yaml')		
+
 		begin
 			# load in private key
 			keydata = nil
@@ -42,12 +44,9 @@ class Expense < ActiveRecord::Base
 
 			json = JSON.parse(resp.body)
 			# token is at json['access_token']		
-			@client = Google::APIClient.new
-			@client.authorization.client_id = oauth_yaml["client_id"]
-			@client.authorization.client_secret = oauth_yaml["client_secret"]
-			@client.authorization.scope = oauth_yaml["scope"]
-			@client.authorization.access_token = json['access_token']
-			
+			self.access_token = json['access_token']
+			self.save
+
 			json
 		rescue
 			logger.info "Something wrong with getting token"
@@ -56,8 +55,14 @@ class Expense < ActiveRecord::Base
 
 	def send_image_to_google
 		check_expire_time!
+		oauth_yaml = YAML.load_file('.google-api.yaml')		
 		begin
+			@client = Google::APIClient.new
+			@client.authorization.access_token = self.access_token
+			
 		  	service = @client.discovered_api('drive', 'v2')
+
+		  	logger.info @client
 		  	res = @client.execute!(
 		  		:api_method => service.files.insert,
 		  		:body => image.read,
@@ -80,8 +85,12 @@ class Expense < ActiveRecord::Base
 
 	def parse_google_doc
 		check_expire_time!
+		oauth_yaml = YAML.load_file('.google-api.yaml')		
 		begin
-			service = @client.discovered_api('drive', 'v2')
+			@client = Google::APIClient.new
+			@client.authorization.access_token = self.access_token
+			
+		  	service = @client.discovered_api('drive', 'v2')
 			res = @client.execute!(:api_method => service.files.get,
 				:parameters => {:fileId => self.google_doc_id})
 			logger.info res

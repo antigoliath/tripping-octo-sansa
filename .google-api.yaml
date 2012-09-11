@@ -1,7 +1,0 @@
---- 
-scope: https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.file
-mechanism: oauth_2
-refresh_token: 1/5Mk_w5gYd92XAihgfMm6Nqj7tWPjDpmyahUsi5k_DZQ
-access_token: ya29.AHES6ZSS__J-H1dE1ZoGdZSsPJkN9t6n_k4OrRSrHyAn0sQ
-client_id: 929938420955.apps.googleusercontent.com
-client_secret: R0dgbTYRbvAHeLsJ_cq4uiXM
