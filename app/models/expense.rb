@@ -5,6 +5,9 @@ class Expense < ActiveRecord::Base
 	attr_accessor :client
 	mount_uploader :image, ImageUploader
 
+	require 'nokogiri'
+	require 'open-uri'
+
 	def check_expire_time!
 		if(!expire_time || expire_time+50 < Time.now)
 			get_service_token
@@ -92,9 +95,25 @@ class Expense < ActiveRecord::Base
 			
 		  	service = @client.discovered_api('drive', 'v2')
 			res = @client.execute!(:api_method => service.files.get,
-				:parameters => {:fileId => self.google_doc_id})
-			logger.info res
-		rescue
+				:parameters => {
+					:fileId => self.google_doc_id
+					})
+			html = "https://docs.google.com/feeds/download/documents/export/Export?id="+
+			self.google_doc_id.to_s+"&exportFormat=html&access_token="+self.access_token.to_s
+
+			page = Nokogiri::HTML(open(html))
+			items = page.css('p.c2')
+			response = ""
+
+			items.each do |item|
+				print item.text + "\n"
+				response.concat(item.text+"\n")
+			end
+			response
+
+		rescue Exception => e
+			print e.message
+			print e.backtrace.inspect
 			logger.info "Something's not right during retrieval of document"
 		end
 	end

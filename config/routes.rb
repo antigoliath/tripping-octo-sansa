@@ -1,11 +1,9 @@
 TrippingOctoSansa::Application.routes.draw do
   resources :expenses do
     collection do
-      get :convert
+      get :convert, :get_page
     end
   end
-
-  match 'get_user_expenses' => 'expenses#get_user_expenses'
 
   devise_for :users
 

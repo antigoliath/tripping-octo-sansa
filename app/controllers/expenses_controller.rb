@@ -85,18 +85,18 @@ class ExpensesController < ApplicationController
     @expense = Expense.find(params[:expense])
     res = @expense.send_image_to_google
     respond_to do |format|
-      #format.html {redirect_to @expense}
+      format.html {redirect_to get_page_expenses_path(:id => @expense.id)}
     end
   end
 
-  def get_user_expenses
-    @expense = Expense.find_by_owner_id(params[:id]) 
+  def get_page
+    @expense = Expense.find(params[:id]) 
+    @text = @expense.parse_google_doc
     respond_to do |format|
       format.html { render }
       format.json { render json: @expense }
     end
   end
-
 
 
 end
